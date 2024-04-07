@@ -23,35 +23,31 @@ form.onsubmit = function (e) {
     let input = document.getElementById('command');
     let output = document.getElementById('terminal-output');
     let value = input.value;
-    if (value === 'gui') {
-        q.innerHTML = `<label >
-        <span class="user">user</span>
-        <span class="neon">@
-        <span class="host">pritamgurung.com.np</span>
-        <span class="neon">: ~$</span>  <span class='user'>gui</span></label>`;
+
+    q.innerHTML = `<label >
+    <span class="user">user</span>
+    <span class="neon">@
+    <span class="host">pritamgurung.com.np</span>
+    <span class="neon">: ~$</span>  <span class='user'>${value}</span></label>`;
+    output.appendChild(q);
+
+    if (!(value in commands)){
+        q.innerHTML += `
+        <div style='color: red;'>${value} command not found</div>`;
         output.appendChild(q);
+    }
+
+    if (value === 'gui') {
         window.location.href = 'https://pritamgurung.com.np';
     }
 
     if (value === 'socials'){
-        q.innerHTML = `<label >
-            <span class="user">user</span>
-            <span class="neon">@
-            <span class="host">pritamgurung.com.np</span>
-            <span class="neon">: ~$</span>  <span class='user'>socials</span></label>
-            <div><span class='neon'>My Social Links are:</span></div>
+        q.innerHTML += `<div><span class='neon'>My Social Links are:</span></div>
             <a href='https://github.com/PrimChim'>GitHub</a> <a href='https://linkedin.com/'>LinkedIn</a>`;
         output.appendChild(q);
     }
 
     if (value === 'help') {
-        q.innerHTML = `<label >
-            <span class="user">user</span>
-            <span class="neon">@
-            <span class="host">pritamgurung.com.np</span>
-            <span class="neon">: ~$</span>  <span class='user'>help</span></label>`;
-
-        output.appendChild(q);
         for (let key in commands) {
             let div = document.createElement('div');
             div.classList.add('output');
